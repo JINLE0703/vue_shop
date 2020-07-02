@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="head_box">
-        <img src="../assets/logo.png" />
+        <img src="../assets/images/logo.jpg" />
       </div>
       <!-- 头像区域 -->
 
@@ -80,7 +80,8 @@ export default {
 <style lang="less" scoped>
 .login_container {
   height: 100%;
-  background-color: #2b4b6b;
+  background: #2b4b6b url("../assets/images/bg.png") no-repeat;
+  background-size: 100% 100%;
 }
 
 .login_box {
