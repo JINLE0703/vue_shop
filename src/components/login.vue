@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="head_box">
-        <img src="../assets/images/logo.jpg" />
+        <img src="../assets/images/logo1.png" />
       </div>
       <!-- 头像区域 -->
 
@@ -17,7 +17,7 @@
       >
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input prefix-icon="iconfont icon-user" v-model="loginForm.username"></el-input>
+          <el-input prefix-icon="iconfont icon-user" v-model="loginForm.username" class="demo-ruleForm"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
@@ -80,7 +80,7 @@ export default {
 <style lang="less" scoped>
 .login_container {
   height: 100%;
-  background: #2b4b6b url("../assets/images/bg.png") no-repeat;
+  background: #2b4b6b url("../assets/images/bg1.jpg") no-repeat;
   background-size: 100% 100%;
 }
 
