@@ -117,10 +117,10 @@ export default {
   height: 100%;
 }
 .el-header {
-  background-color: #373d41;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #373d41;
   color: #fff;
   font-size: 28px;
   div {
@@ -136,6 +136,7 @@ export default {
 .el-aside {
   background-color: #313541;
   transition: width 0.5s;
+  overflow: hidden;
   .el-menu {
     border-right: none;
   }

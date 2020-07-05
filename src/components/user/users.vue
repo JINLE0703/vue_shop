@@ -54,7 +54,12 @@
             <el-button type="danger" icon="el-icon-delete" circle @click="removeUser(scope.row.id)"></el-button>
             <!-- 分配角色 -->
             <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting" circle></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                circle
+                @click="showSetRoleDialog(scope.row)"
+              ></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -123,6 +128,17 @@
       </span>
     </el-dialog>
     <!-- 修改用户对话框 -->
+
+    <!-- 分配角色对话框 -->
+    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="50%">
+      <p>用户名称：{{userInfo.username}}</p>
+      <p>角色名称：{{userInfo.role_name}}</p>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="setRoleDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 分配角色对话框 -->
   </div>
 </template>
 
@@ -195,7 +211,13 @@ export default {
           { required: true, message: '请输入手机号码', trigger: 'blur' },
           { validator: checkMobile, trigger: 'blur' }
         ]
-      }
+      },
+      // 分配角色对话框
+      setRoleDialogVisible: false,
+      // 当前分配角色的用户数据
+      userInfo: {},
+      // 所有角色列表数据
+      rolesList: []
     }
   },
   created() {
@@ -301,6 +323,20 @@ export default {
         this.queryInfo.pagenum--
       }
       this.getUserList()
+    },
+    // 分配角色对话框显示隐藏
+    showSetRoleDialog(userInfo) {
+      this.userInfo = userInfo
+      console.log(this.userInfo)
+      this.setRoleDialogVisible = true
+    },
+    // 获取角色列表数据
+    async getRolesList() {
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
+      this.rolesList = res.data
     }
   }
 }
