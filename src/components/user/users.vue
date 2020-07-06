@@ -130,12 +130,28 @@
     <!-- 修改用户对话框 -->
 
     <!-- 分配角色对话框 -->
-    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="50%">
+    <el-dialog
+      title="分配角色"
+      :visible.sync="setRoleDialogVisible"
+      width="50%"
+      @close="setRoleDialogClose"
+    >
       <p>用户名称：{{userInfo.username}}</p>
       <p>角色名称：{{userInfo.role_name}}</p>
+      <p>
+        分配角色：
+        <el-select v-model="selectedRoleId" placeholder="请选择">
+          <el-option
+            v-for="item in rolesList"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id"
+          ></el-option>
+        </el-select>
+      </p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRoleDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="setRoleDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="setRole">确 定</el-button>
       </span>
     </el-dialog>
     <!-- 分配角色对话框 -->
@@ -217,7 +233,9 @@ export default {
       // 当前分配角色的用户数据
       userInfo: {},
       // 所有角色列表数据
-      rolesList: []
+      rolesList: [],
+      // 分配角色被选中的id
+      selectedRoleId: ''
     }
   },
   created() {
@@ -327,7 +345,8 @@ export default {
     // 分配角色对话框显示隐藏
     showSetRoleDialog(userInfo) {
       this.userInfo = userInfo
-      console.log(this.userInfo)
+      // 获取角色列表数据
+      this.getRolesList()
       this.setRoleDialogVisible = true
     },
     // 获取角色列表数据
@@ -337,6 +356,23 @@ export default {
         return this.$message.error(res.meta.msg)
       }
       this.rolesList = res.data
+    },
+    // 分配角色
+    async setRole() {
+      if (!this.selectedRoleId) {
+        return this.$message.error('请填写分配角色')
+      }
+      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, { rid: this.selectedRoleId })
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
+      this.$message.success(res.meta.msg)
+      this.getUserList()
+      this.setRoleDialogVisible = false
+    },
+    setRoleDialogClose() {
+      this.selectedRoleId = ''
+      this.userInfo = {}
     }
   }
 }
