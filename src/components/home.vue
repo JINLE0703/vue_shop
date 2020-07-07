@@ -11,7 +11,7 @@
     <!-- 头部区域 -->
     <el-container>
       <!-- 侧边栏区域 -->
-      <el-aside :width="isCollapse ? '64px' : '180px'">
+      <el-aside :width="isCollapse ? '80px' : '180px'">
         <el-menu
           background-color="#313541"
           text-color="#fff"
@@ -48,12 +48,13 @@
             <!-- 二级菜单区域 -->
           </el-submenu>
         </el-menu>
+        <!-- 折叠菜单 -->
+        <div class="toggle-button" @click="toggleCollapse">
+          <span :class="isCollapse ? 'el-icon-arrow-right':'el-icon-arrow-left'"></span>
+        </div>
       </el-aside>
       <!-- 侧边栏区域 -->
-      <!-- 折叠菜单 -->
-      <div class="toggle_button" @click="toggleCollapse">
-        <span :class="isCollapse ? 'el-icon-arrow-right':'el-icon-arrow-left'"></span>
-      </div>
+
       <!-- 主体区域 -->
       <el-main>
         <!-- 路由占位符 -->
@@ -134,14 +135,16 @@ export default {
   }
 }
 .el-aside {
+  display: flex;
   background-color: #313541;
   transition: width 0.5s;
   overflow: hidden;
   .el-menu {
+    width: 165px;
     border-right: none;
   }
 }
-.toggle_button {
+.toggle-button {
   position: relative;
   height: 100%;
   width: 15px;
