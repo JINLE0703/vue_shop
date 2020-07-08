@@ -215,7 +215,7 @@ export default {
           if (this.previousElementSibling) this.previousElementSibling.click()
         }
       })
-    }, 1000)
+    }, 0)
   },
   methods: {
     // 获取商品分类列表
@@ -326,7 +326,7 @@ export default {
     }
   },
   watch: {
-    // 监听添加分类联机选择器值的变化
+    // 监听添加分类联级选择器值的变化
     selectedKeys() {
       if (this.$refs.addCateCascaderRef) {
         // 监听值发生变化就关闭它
