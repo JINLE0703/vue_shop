@@ -33,3 +33,15 @@ body,
 .el-cascader-node label {
   display: none;
 }
+
+.el-steps {
+    margin: 15px 0;
+}
+
+.el-step__title {
+    font-size: 14px;
+}
+
+.ql-container {
+    min-height: 300px;
+}
